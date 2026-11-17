@@ -1,0 +1,351 @@
+// 상속 
+
+// 자가진단 (1)
+
+import java.util.Scanner;
+
+class Student {
+    protected String name;
+    protected int grade;
+
+    public Student(String name, int grade) {
+        this.name = name;
+        this.grade = grade;
+    }
+}
+
+class Score extends Student {
+    private int english;
+    private int mathematics;
+
+    public Score(String name, int grade, int english, int mathematics) {
+        super(name, grade);
+        this.english = english;
+        this.mathematics = mathematics;
+    }
+
+    public void output() {
+        System.out.println("name : " + name);
+        System.out.println("grade : " + grade);
+        System.out.println("english : " + english);
+        System.out.println("mathematics : " + mathematics);
+        System.out.println("sum : " + (english + mathematics));
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String name = sc.next();
+        int grade = sc.nextInt();
+        int eng = sc.nextInt();
+        int math = sc.nextInt();
+
+        Score s = new Score(name, grade, eng, math);
+        s.output();
+    }
+}
+
+// 자가진단 (2)
+
+import java.util.Scanner;
+
+class Student {
+    protected String name;
+    protected int grade;
+
+    public Student(String name, int grade) {
+        this.name = name;
+        this.grade = grade;
+    }
+}
+
+class Score extends Student {
+    private int english;
+    private int mathematics;
+
+    public Score(String name, int grade, int english, int mathematics) {
+        super(name, grade);
+        this.english = english;
+        this.mathematics = mathematics;
+    }
+
+    public void output() {
+        System.out.println("== Score ==");
+        System.out.println("name : " + name);
+        System.out.println("grade : " + grade);
+        System.out.println("english : " + english);
+        System.out.println("mathematics : " + mathematics);
+    }
+}
+
+class Physical extends Student {
+    private int height;
+    private double weight;
+
+    public Physical(String name, int grade, int height, double weight) {
+        super(name, grade);
+        this.height = height;
+        this.weight = weight;
+    }
+
+    public void output() {
+        System.out.println("== Physical ==");
+        System.out.println("name : " + name);
+        System.out.println("grade : " + grade);
+        System.out.println("height : " + height);
+        System.out.println("weight : " + weight);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String name1 = sc.next();
+        int grade1 = sc.nextInt();
+        int eng = sc.nextInt();
+        int math = sc.nextInt();
+
+        String name2 = sc.next();
+        int grade2 = sc.nextInt();
+        int height = sc.nextInt();
+        double weight = sc.nextDouble();
+
+        Score s = new Score(name1, grade1, eng, math);
+        Physical p = new Physical(name2, grade2, height, weight);
+
+        s.output();
+        System.out.println();
+        p.output();
+    }
+}
+
+// 자가진단 (3)
+
+class Animal {
+    public void crying() {
+        System.out.println("animal : crying");
+    }
+}
+
+class Puppy extends Animal {
+    @Override
+    public void crying() {
+        System.out.println("puppy : bowbow");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    public void crying() {
+        System.out.println("cat : meowing");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal ani = new Animal(); //슈퍼클래스
+        Puppy pup = new Puppy();
+        Cat cat = new Cat();
+        ani.crying(); //슈퍼클래스
+        pup.crying(); //오버라이딩
+        cat.crying(); //오버라이딩
+    }
+}
+
+// 자가진단 (4)
+
+import java.util.Scanner;
+
+class Figure {
+    double getArea() {
+        return 0.0;
+    }
+
+    void output() {
+    }
+}
+
+class Circle extends Figure {
+    double radius;
+
+    Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    double getArea() {
+        return radius * radius * 3.14;
+    }
+
+    @Override
+    void output() {
+        System.out.printf("Circle's area : %.1f\n", getArea());
+    }
+}
+
+class Triangle extends Figure {
+    double base, height;
+
+    Triangle(double base, double height) {
+        this.base = base;
+        this.height = height;
+    }
+
+    @Override
+    double getArea() {
+        return base * height / 2.0;
+    }
+
+    @Override
+    void output() {
+        System.out.printf("Triangle's area : %.1f\n", getArea());
+    }
+}
+
+class Rectangle extends Figure {
+    double width, length;
+
+    Rectangle(double width, double length) {
+        this.width = width;
+        this.length = length;
+    }
+
+    @Override
+    double getArea() {
+        return width * length;
+    }
+
+    @Override
+    void output() {
+        System.out.printf("Rectangle area : %.1f\n", getArea());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double r = sc.nextDouble();
+        double b = sc.nextDouble();
+        double h = sc.nextDouble();
+        double w = sc.nextDouble();
+        double l = sc.nextDouble();
+
+        Figure[] figures = {
+            new Circle(r),
+            new Triangle(b, h),
+            new Rectangle(w, l)
+        };
+
+        for (Figure f : figures) {
+            f.output();
+        }
+    }
+}
+
+// 자가진단 (5)
+
+import java.util.Scanner;
+
+class Student {
+    String name;
+    int height;
+    double weight;
+
+    Student(String name, int height, double weight) {
+        this.name = name;
+        this.height = height;
+        this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s's body : %dcm, %.1fkg", name, height, weight);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Student)) return false;
+        Student other = (Student) obj;
+        return this.height == other.height && Double.compare(this.weight, other.weight) == 0;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Student s1 = new Student(sc.next(), sc.nextInt(), sc.nextDouble());
+        Student s2 = new Student(sc.next(), sc.nextInt(), sc.nextDouble());
+
+        System.out.println("Body.Student");
+        System.out.println(s1);
+
+        if (s1.equals(s2)) {
+            System.out.println(s1.name + "'s body == " + s2.name + "'s body");
+        } else {
+            System.out.println(s1.name + "'s body != " + s2.name + "'s body");
+        }
+    }
+}
+
+// 인터페이스 
+
+// 자가진단 (1)
+
+import java.util.Scanner;
+
+class Super {
+    String name;
+    int age;
+
+    Super(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    void output() {
+        System.out.println("name : " + name);
+        System.out.println("Super age : " + age);
+    }
+}
+
+class Sub extends Super {
+    int age;
+    String address;
+
+    Sub(String name, int superAge, int subAge, String address) {
+        super(name, superAge);
+        this.age = subAge;
+        this.address = address;
+    }
+
+    @Override
+    void output() {
+        super.output();
+        System.out.println("Sub age : " + this.age);
+        System.out.println("address : " + this.address);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String name = sc.next();
+        int superAge = sc.nextInt();
+        int subAge = sc.nextInt();
+        String address = sc.next();
+
+        Super obj = new Sub(name, superAge, subAge, address); // 업캐스팅
+        obj.output();
+    }
+}
+
+// 에외처리 
+
+// 자가진단 (4)
+
