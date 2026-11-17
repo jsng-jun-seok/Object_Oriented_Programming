@@ -1,0 +1,444 @@
+// 객체지향 1
+
+// 형성평가 (!)
+
+import java.util.Scanner;
+
+public class Main {
+    static class Person {
+        String name;
+        String tel;
+        String addr;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Person p = new Person();
+
+        p.name = sc.next();
+        p.tel = sc.next();
+        p.addr = sc.next();
+
+        System.out.println("name : " + p.name);
+        System.out.println("tel : " + p.tel);
+        System.out.println("addr : " + p.addr);
+    }
+}
+
+// 형성평가 (2)
+
+import java.util.Scanner;
+
+public class Main {
+    static class Person {
+        String name;
+        String tel;
+        String addr;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Person[] p = new Person[3];
+
+        for (int i = 0; i < 3; i++) {
+            p[i] = new Person();
+            p[i].name = sc.next();
+            p[i].tel = sc.next();
+            p[i].addr = sc.next();
+        }
+
+        int firstIdx = 0;
+        for (int i = 1; i < 3; i++) {
+            if (p[i].name.compareTo(p[firstIdx].name) < 0) {
+                firstIdx = i;
+            }
+        }
+
+        System.out.println("name : " + p[firstIdx].name);
+        System.out.println("tel : " + p[firstIdx].tel);
+        System.out.println("addr : " + p[firstIdx].addr);
+    }
+}
+
+// 형성평가 (3)
+
+import java.util.Scanner;
+
+public class Main {
+    static class Rect {
+        int x, y, x2, y2;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Rect r1 = new Rect();
+        Rect r2 = new Rect();
+        Rect res = new Rect();
+
+        r1.x = sc.nextInt();
+        r1.y = sc.nextInt();
+        r1.x2 = sc.nextInt();
+        r1.y2 = sc.nextInt();
+
+        r2.x = sc.nextInt();
+        r2.y = sc.nextInt();
+        r2.x2 = sc.nextInt();
+        r2.y2 = sc.nextInt();
+
+        res.x = Math.min(r1.x, r2.x);
+        res.y = Math.min(r1.y, r2.y);
+        res.x2 = Math.max(r1.x2, r2.x2);
+        res.y2 = Math.max(r1.y2, r2.y2);
+
+        System.out.println(res.x + " " + res.y + " " + res.x2 + " " + res.y2);
+    }
+}
+
+// 형성평가 (4)
+
+import java.util.Scanner;
+
+public class Main {
+    static class Body {
+        int height;
+        double weight;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Body father = new Body();
+        Body mother = new Body();
+        Body student = new Body();
+
+        father.height = sc.nextInt();
+        father.weight = sc.nextDouble();
+        mother.height = sc.nextInt();
+        mother.weight = sc.nextDouble();
+
+        student.height = (father.height + mother.height) / 2 + 5;
+        student.weight = (father.weight + mother.weight) / 2.0 - 4.5;
+
+        System.out.println("height : " + student.height + "cm");
+        System.out.printf("weight : %.1fkg\n", student.weight);
+    }
+}
+
+// 형성평가 (5)
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    static class Student {
+        String name;
+        int s1, s2, s3;
+        int total;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        Student[] students = new Student[n];
+        for (int i = 0; i < n; i++) {
+            students[i] = new Student();
+            students[i].name = sc.next();
+            students[i].s1 = sc.nextInt();
+            students[i].s2 = sc.nextInt();
+            students[i].s3 = sc.nextInt();
+            students[i].total = students[i].s1 + students[i].s2 + students[i].s3;
+        }
+
+        Arrays.sort(students, (a, b) -> Integer.compare(b.total, a.total));
+
+        for (int i = 0; i < n; i++) {
+            System.out.println(students[i].name + " " +
+                               students[i].s1 + " " +
+                               students[i].s2 + " " +
+                               students[i].s3 + " " +
+                               students[i].total);
+        }
+    }
+}
+
+// 객체지향 2 
+
+// 자가진단 (1)
+
+import java.util.Scanner;
+
+class Time {
+    int hour, min, sec;
+
+    Time() {
+        set(0, 0, 0);
+    }
+
+    Time(int h) {
+        set(h, 0, 0);
+    }
+
+    Time(int h, int m, int s) {
+        set(h, m, s);
+    }
+
+    void set(int h, int m, int s) {
+        this.hour = h;
+        this.min = m;
+        this.sec = s;
+    }
+
+    void output(String label) {
+        System.out.println(label + " -> hour : " + hour + ", minute : " + min + ", second : " + sec);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int h1 = sc.nextInt();
+        int h2 = sc.nextInt();
+        int m2 = sc.nextInt();
+        int s2 = sc.nextInt();
+
+        Time t1 = new Time();
+        Time t2 = new Time(h1);
+        Time t3 = new Time(h2, m2, s2);
+
+        t1.output("Midnight");
+        t2.output("Input time");
+        t3.output("Promise");
+    }
+}
+
+// 자가진단 (2)
+
+import java.util.Scanner;
+
+class Person {
+    private String name;
+    private int age;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String name = sc.next();
+        int age = sc.nextInt();
+
+        Person p = new Person();
+        p.setName(name);
+        p.setAge(age);
+
+        System.out.println("name : " + p.getName());
+        System.out.println("age : " + p.getAge());
+    }
+}
+
+// 자가진단 (3)
+
+import java.util.Scanner;
+
+class Student {
+    private String name;
+    private int score;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setScore(int s) {
+        if (s < 0) {
+            this.score = 0;
+        } else if (s > 100) {
+            this.score = 100;
+        } else {
+            this.score = s;
+        }
+    }
+
+    public void addScore(int add) {
+        if (add < 0) return; // 음수이면 무시
+        this.score += add;
+        if (this.score > 100) {
+            this.score = 100;
+        }
+    }
+
+    public int getScore() {
+        return score;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Student st = new Student();
+
+        System.out.print("Input name : ");
+        st.setName(sc.next());
+
+        System.out.print("Input score : ");
+        st.setScore(sc.nextInt());
+
+        System.out.print("Input add score : ");
+        st.addScore(sc.nextInt());
+
+        System.out.println(st.getName() + "'s score is " + st.getScore());
+    }
+}
+
+// 자가진단 (4)
+
+import java.util.Scanner;
+
+class Time {
+    int hour, min, sec;
+
+    Time() {
+        this(0, 0, 0);
+    }
+
+    Time(int hour) {
+        this(hour, 0, 0);
+    }
+
+    Time(int hour, int min, int sec) {
+        this.hour = hour;
+        this.min = min;
+        this.sec = sec;
+    }
+
+    void output(String label) {
+        System.out.println(label + " -> hour : " + hour + ", minute : " + min + ", second : " + sec);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int h1 = sc.nextInt();
+        int h2 = sc.nextInt();
+        int m2 = sc.nextInt();
+        int s2 = sc.nextInt();
+
+        Time t1 = new Time();
+        Time t2 = new Time(h1);
+        Time t3 = new Time(h2, m2, s2);
+
+        t1.output("Midnight");
+        t2.output("Input time");
+        t3.output("Promise");
+    }
+}
+
+// 자가진단 (5)
+
+import java.util.Scanner;
+
+class Student {
+    String name;
+    int score;
+    static int passCount = 0; // 클래스 변수(static 변수)
+
+    Student(String name, int score) {
+        this.name = name;
+        this.score = score;
+        if (score >= 80) {
+            passCount++;
+        }
+    }
+
+    boolean isPassed() {
+        return score >= 80;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Student[] students = new Student[5];
+
+        for (int i = 0; i < 5; i++) {
+            String name = sc.next();
+            int score = sc.nextInt();
+            students[i] = new Student(name, score);
+        }
+
+        System.out.println("Passed number : " + Student.passCount);
+        for (int i = 0; i < 5; i++) {
+            if (students[i].isPassed()) {
+                System.out.println(students[i].name);
+            }
+        }
+    }
+}
+
+// 자가진단 (6)
+
+import java.util.Scanner;
+
+class Rectangle {
+    private int width, height;
+    private static int maxArea = 0; // static private 변수
+
+    public Rectangle(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    public int getArea() {
+        int area = width * height;
+        if (area > maxArea) {
+            maxArea = area;
+        }
+        return area;
+    }
+
+    public static int getMaxArea() {
+        return maxArea;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("Input data : ");
+            int w = sc.nextInt();
+            int h = sc.nextInt();
+
+            if (w == 0 || h == 0) {
+                break;
+            }
+
+            Rectangle rect = new Rectangle(w, h);
+            System.out.println("area : " + rect.getArea());
+        }
+
+        System.out.println("Max area : " + Rectangle.getMaxArea());
+    }
+}
